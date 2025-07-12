@@ -13,5 +13,6 @@ class ThemeService{
 
  //Font Size
 static final double HEADING_FONT_SIZE = 22;
+static final double SUBTITLE_FONT_SZIDE = 13;
 
 }

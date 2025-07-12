@@ -10,4 +10,9 @@ class PickImageModel extends ChangeNotifier {
     _image = file;
     notifyListeners();
   }
+
+  void cancelPickedImage(){
+    _image = null;
+    notifyListeners();
+  }
 }
