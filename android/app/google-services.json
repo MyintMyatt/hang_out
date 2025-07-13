@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "354102179208",
+    "firebase_url": "https://hang-out-e2886-default-rtdb.firebaseio.com",
+    "project_id": "hang-out-e2886",
+    "storage_bucket": "hang-out-e2886.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:354102179208:android:841f4ef30672e684d1763d",
+        "android_client_info": {
+          "package_name": "com.example.hang_out"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAf7WRoUgdA878JuLDDHjd2D0wR17w4hNc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
