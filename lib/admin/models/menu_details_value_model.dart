@@ -23,7 +23,7 @@ class MenuDetailsValueModel extends ChangeNotifier{
   double? get price => _price;
   int? get stock => _stock;
   String? get desc => _desc;
-  String? get imageURL => _imageURL??'https://www.google.com';
+  String? get imageURL => _imageURL??'';
 
 
   void setMenuTitle({required String value}){
@@ -82,6 +82,16 @@ class MenuDetailsValueModel extends ChangeNotifier{
   }
 
   void clearImageURLValue(){
+    _imageURL = null;
+    notifyListeners();
+  }
+
+  void cancelAll() {
+    _menuTitle = null;
+    _selectedCategoryValue = null;
+    _price = null;
+    _stock = null;
+    _desc = null;
     _imageURL = null;
     notifyListeners();
   }

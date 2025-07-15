@@ -9,30 +9,33 @@ import 'package:hang_out/theme/theme.dart';
 import 'package:provider/provider.dart';
 
 Widget submitButton({required BuildContext context}) {
-  final menu_details_value_model = context.watch<MenuDetailsValueModel>();
-  final menuProvider = context.read<MenuProvider>();
-  final pickedImageModel = context.watch<PickImageModel>();
+
   return SizedBox(
     child: ElevatedButton(
       onPressed: () async {
+
+        final menuDetailsValueModel = context.read<MenuDetailsValueModel>();
+        final menuProvider = context.read<MenuProvider>();
+        final pickedImageModel = context.read<PickImageModel>();
+
         //show loading
-        context.read<MenuDetailsValueModel>().setLoading(true);
+        menuDetailsValueModel.setLoading(true);
 
         if (pickedImageModel.image == null ||
-            menu_details_value_model.menuTitle == null ||
-            menu_details_value_model.menuTitle!.isEmpty ||
-            menu_details_value_model.categoryValue == null ||
-            menu_details_value_model.categoryValue!.isEmpty ||
-            menu_details_value_model.imageURL == null ||
-            menu_details_value_model.imageURL!.isEmpty ||
-            menu_details_value_model.stock == null ||
-            menu_details_value_model.stock!.isNaN ||
-            menu_details_value_model.price == null ||
-            menu_details_value_model.price!.isNaN ||
-            menu_details_value_model.desc == null ||
-            menu_details_value_model.desc!.isEmpty) {
+            menuDetailsValueModel.menuTitle == null ||
+            menuDetailsValueModel.menuTitle!.isEmpty ||
+            menuDetailsValueModel.categoryValue == null ||
+            menuDetailsValueModel.categoryValue!.isEmpty ||
+            menuDetailsValueModel.imageURL == null ||
+            // menuDetailsValueModel.imageURL!.isEmpty ||
+            menuDetailsValueModel.stock == null ||
+            menuDetailsValueModel.stock!.isNaN ||
+            menuDetailsValueModel.price == null ||
+            menuDetailsValueModel.price!.isNaN ||
+            menuDetailsValueModel.desc == null ||
+            menuDetailsValueModel.desc!.isEmpty) {
           //  remove loading
-          context.read<MenuDetailsValueModel>().setLoading(false);
+          menuDetailsValueModel.setLoading(false);
 
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
@@ -53,13 +56,13 @@ Widget submitButton({required BuildContext context}) {
           );
 
           Menu menu = Menu(
-            menuName: menu_details_value_model.menuTitle!,
+            menuName: menuDetailsValueModel.menuTitle!,
             menuDetails: MenuDetails(
-              category: menu_details_value_model.categoryValue!,
-              imageURL: menu_details_value_model.imageURL!,
-              stock: menu_details_value_model.stock!,
-              price: menu_details_value_model.price!,
-              desc: menu_details_value_model.desc!,
+              category: menuDetailsValueModel.categoryValue!,
+              imageURL: menuDetailsValueModel.imageURL!,
+              stock: menuDetailsValueModel.stock!,
+              price: menuDetailsValueModel.price!,
+              desc: menuDetailsValueModel.desc!,
             ),
           );
 
@@ -68,14 +71,18 @@ Widget submitButton({required BuildContext context}) {
           //add menu to firebase
          await menuProvider.addNewMenu(menu);
 
+          print('✅ setLoading(false) called');
           // remove loading
           context.read<MenuDetailsValueModel>().setLoading(false);
+
+          await Future.delayed(Duration(milliseconds: 100));
+          print('✅ Navigating to success screen...');
+          //Navigate to success screen
+          Navigator.pushNamed(context, '/success');
         }
-        // if(menu_details_value_model.menuTitle.isEmpt)
-        // menuProvider.addNewMenu(menu);
       },
       style: ButtonStyle(
-        backgroundColor: WidgetStatePropertyAll(ThemeService.GREEN_COLOR),
+        backgroundColor: WidgetStatePropertyAll(Colors.deepOrange),
         fixedSize: WidgetStatePropertyAll(Size(double.infinity, 50)),
         shape: WidgetStatePropertyAll(
           RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),

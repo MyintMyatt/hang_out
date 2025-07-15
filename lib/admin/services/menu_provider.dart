@@ -14,6 +14,7 @@ class MenuProvider extends ChangeNotifier{
   }
 
   void _listenToMenus() async{
+    print('🟡 Listening to Firebase...');
     _menuRef.onValue.listen((event){
       final data = event.snapshot.value;
       print('data => $data');
@@ -33,9 +34,30 @@ class MenuProvider extends ChangeNotifier{
     });
   }
 
-  Future<void> addNewMenu(Menu menu) async{
-    await _menuRef.child(menu.menuName).set(menu.toMap());
+  // Future<void> addNewMenu(Menu menu) async{
+  //   await _menuRef.child(menu.menuName).set(menu.toMap());
+  // }
+
+  Future<void> addNewMenu(Menu menu) async {
+    try {
+      final stopwatch = Stopwatch()..start();
+      print('🟡 Start writing to Firebase...');
+
+      await _menuRef.child(menu.menuName).set(menu.toMap());
+
+      stopwatch.stop();
+      print('✅ Firebase write complete in ${stopwatch.elapsedMilliseconds}ms');
+    } catch (e) {
+      print('❌ Error writing to Firebase: $e');
+    }
   }
 
+
+  Future<void> test() async{
+    print('start');
+    await _menuRef.child('test_menu').set({'foo': 'bar'});
+    print('Test write complete');
+
+  }
 
 }

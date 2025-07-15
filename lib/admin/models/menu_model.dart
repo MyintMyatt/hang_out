@@ -47,11 +47,11 @@ class MenuDetails {
 
   factory MenuDetails.fromMap(Map<String, dynamic> map) {
     return MenuDetails(
-      category: map['category'],
-      imageURL: map['imageURL'],
-      stock: map['stock'] as int,
-      price:( map['price'] as num).toDouble(),
-      desc: map['desc']
+      category: map['category']?? '',
+      imageURL: map['imageURL'] ?? '',
+      stock: map['stock'] ?? 0 as int,
+      price:( map['price'] ?? 0 as num).toDouble(),
+      desc: map['desc'] ?? ''
     );
   }
 }

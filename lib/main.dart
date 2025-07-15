@@ -5,12 +5,15 @@ import 'package:hang_out/admin/models/pick_image_model.dart';
 import 'package:hang_out/admin/models/menu_details_value_model.dart';
 import 'package:hang_out/admin/screen/add_new_menu.dart';
 import 'package:hang_out/admin/screen/home.dart';
+import 'package:hang_out/admin/screen/success_screen.dart';
 import 'package:hang_out/admin/services/menu_provider.dart';
 import 'package:provider/provider.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
+
   await Firebase.initializeApp();
+  print('✅ Firebase Initialized');
   runApp(
     MultiProvider(
       providers: [
@@ -34,6 +37,7 @@ class HangOut extends StatelessWidget {
       routes: {
         '/': (context) => AdminHomeScreen(),
         '/add_new_menu': (context) => AddNewMenuScreen(),
+        '/success':(context) => SuccessScreen()
       },
       debugShowCheckedModeBanner: false,
       // theme: ThemeData(colorScheme: ColorScheme.fromSeed(seedColor: Color(0xFF03665e))),
